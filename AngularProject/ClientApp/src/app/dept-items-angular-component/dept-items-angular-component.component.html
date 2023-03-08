@@ -1,0 +1,109 @@
+<p>dept-items-angular-component works!</p>
+<style>
+  .form-group label {
+    justify-content: left !important;
+  }
+</style>
+
+<div class="row justify-content-center align-items-center ml-2">
+
+
+  <form>
+
+    <h1>
+      Items CRUD in Angular6!
+    </h1>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Department Table</h2>
+        <div class="form-group">
+          <label for="deptid">Dept Id</label>
+          <input id="deptid" name="deptid" #deptid [value]=deptid2 class="form-control" (input)="deptchange()" [(ngModel)]="deptid2" />
+        </div>
+
+        <div class="form-group">
+          <label for="deptname">Dept Name</label>
+          <input id="deptname" name="deptname" #deptname [value]=deptname2 class="form-control" [(ngModel)]="deptname2" />
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input id="location" name="Location" #location [value]=location2 class="form-control" [(ngModel)]="location2" />
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group form-inline">
+          <label class="col-md-4 text-left" for="itemcode">ItemCode:</label>
+          <input name="itemcode" id="itemcode" #itemcode [value]=itemcode2 class="form-control col-md-8" [(ngModel)]="itemcode2" />
+        </div>
+        <div class="form-group form-inline">
+          <label class="col-md-4 text-left" for="itemname">Item Name:</label>
+          <input name="itemname" id="itemname" #itemname [value]=itemname2 class="form-control col-md-8" [(ngModel)]=itemname2 />
+        </div>
+
+        <div class="form-group form-inline">
+          <label class="col-md-4 text-left" for="cost">Cost:</label>
+          <input name="cost" id="cost" #cost [value]=cost2 class="form-control col-md-8" [(ngModel)]="cost2" />
+        </div>
+        <div class="form-group form-inline">
+          <label class="col-md-4 text-left" for="rate">Sell:</label>
+          <input name="rate" id="rate" #rate [value]=rate2 class="form-control col-md-8" [(ngModel)]="rate2" />
+        </div>
+        <div class="form-group form-inline">
+          <label class="col-md-4 text-left" for="date">Date:</label>
+          <input type="date" name="date" id="date" #date [value]=date2 class="form-control col-md-8" [(ngModel)]="date2" />
+        </div>
+        <div class="form-group form-inline">
+          <label class="image-upload-container btn btn-bwm col-md-4 text-left">
+            <span>Select Image</span>
+          </label>
+          <input type="file" name="picture" id="picture" (change)="onFileChanged($event)" class="form-control col-md-8" />
+          <br />
+        </div>
+
+
+        <button type="button" (click)="addItems(itemcode.value, itemname.value,deptid.value,cost.value,rate.value,date.value,'')" class="btn-primary btn mr-3">Add</button>
+        <button type="button" (click)="updateItems(itemcode, itemname,deptid,cost,rate,date)" class="btn btn-info mr-3">Update</button>
+        <button type="button" (click)="deleteItems()" class="btn btn-success mr-3">Delete</button>
+      </div>
+    </div>
+
+  </form>
+
+
+
+</div>
+
+
+<div class="row">
+  <table class="table table-condensed">
+    <tr>
+      <th>SL No</th>
+      <th>Item Code</th>
+      <th>Item Name</th>
+      <th>Cost</th>
+      <th>Sell</th>
+      <th>Date</th>
+      <th>Picture</th>
+
+    </tr>
+    <tr *ngFor="let item of items let i=index" (click)="show(i,item.itemcode,item.itemname, item.deptid,item.cost,item.rate,item.date,item.picture)">
+      <td>
+        {{i+1}}
+      </td>
+      <td> {{item.itemcode}}</td>
+      <td> {{item.itemname}}</td>
+      <td> {{item.cost}}</td>
+      <td> {{item.rate}}</td>
+      <td> {{item.date}}</td>
+      <td><img width="100" src="https://localhost:7140/uploads/{{item.picture}}" /></td>
+
+    </tr>
+  </table>
+  <hr />
+  Data: {{data2}}
+  <button type="button" (click)="myalert('hlo')" class="btn btn-success mr-3">Alert</button>
+  <hr />
+  <button type="button" (click)="saveAll()" class="btn-primary btn mr-3">Save</button>
+  <button type="button" (click)="deleteAll()" class="btn btn-success mr-3">Drop</button>
+</div>
